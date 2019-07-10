@@ -1,14 +1,6 @@
 local composer = require( "composer" )
 
 
-_data = require("lib.data")
---_data:wipe() -- wipes all saved data
---_data:save() -- saves data
---_data:update("skinCircle", 2) -- creates/updates some value
---_data:get("key") -- receives some value
-_data:load()
-
-
 
 display.setStatusBar( display.HiddenStatusBar )
 
