@@ -23,8 +23,10 @@ physics.setDrawMode( "hybrid" )
 -- -----------------------------------------------------------------------------------
 
 
---****************************************
---Flying yellow baloons in the background
+
+--Create flying yellow baloons in the background
+--***********↓↓↓↓↓↓↓↓↓↓******************
+
 local vent = CBE.newVent({
     title = "sparks",
     positionType = "inRadius",
@@ -43,8 +45,10 @@ local vent = CBE.newVent({
 
 })
 vent:start()
---Flying yellow baloons in the background
---****************************************
+
+--************↑↑↑↑↑↑↑↑↑↑************************
+--Create flying yellow baloons in the background
+
 
 -- -----------------------------------------------------------------------------------
 -- Scene event functions
@@ -92,12 +96,7 @@ function scene:create( event )
 --*************↑↑↑↑↑↑↑↑↑↑**************************
 --Change background of scene everytime when load it
 
-menuGroup:insert(vent)
-
-
-
-
-
+  menuGroup:insert(vent)
 
 
     ---ЗАМЕНИТЬ НА ОДНУ КАРТИНКУ
@@ -139,58 +138,74 @@ menuGroup:insert(vent)
     menuGroup:insert(Ar)
 
 
+
+
+
+
+
     ---ЗАМЕНИТЬ НА ОДНУ КАРТИНКУ
 
 
 
 
+--***********Create two buttons******************
+--***************↓↓↓↓↓↓↓↓↓↓**********************
+
+  local function giftButtonFunc( event )
+
+      if ( "ended" == event.phase ) then
+
+      end
+  end
 
 
-local function handleButtonEvent( event )
+  local giftButton = widget.newButton(
+      {
+          left = 110,
+          top = 310,
+          defaultFile = "menu/giftBig.png",
+          overFile = "menu/giftSmall.png",
+          onEvent = giftButtonFunc,
 
-    if ( "ended" == event.phase ) then
-
-    end
-end
-
-
-local gift = widget.newButton(
-    {
-        left = 110,
-        top = 310,
-        defaultFile = "menu/giftBig.png",
-        overFile = "menu/giftSmall.png",
-        onEvent = handleButtonEvent,
-
-    }
-)
-gift.xScale = 0.28
-gift.yScale = 0.28
-sceneGroup:insert(gift)
+      }
+  )
+  giftButton.x = cX + 117
+  giftButton.y = cY + 235
+  giftButton.xScale = 0.28
+  giftButton.yScale = 0.28
+  sceneGroup:insert(giftButton)
 
 
-local function handleButtonEvent( event )
+  local function playButtonFunc( event )
 
-    if ( "ended" == event.phase ) then
-       composer.gotoScene( "scenes.game" , {effect = "fade", time = 300} );
-    end
-end
+      if ( "ended" == event.phase ) then
+         composer.gotoScene( "scenes.game" , {effect = "fade", time = 300} );
+      end
+  end
 
 
-local play = widget.newButton(
-    {
-        sheetContentWidth = 80,
-        left = -155,
-        top = 165,
-        defaultFile = "menu/playButton.png",
-        overFile = "menu/playButtonSmall.png",
-        onEvent = handleButtonEvent,
+  local playButton = widget.newButton(
+      {
+          width = 520,
+          height = 340,
+          defaultFile = "menu/playButton.png",
+          overFile = "menu/playButtonSmall.png",
+          onEvent = playButtonFunc,
 
-    }
-)
-play.xScale = 0.55
-play.yScale = 0.55
-sceneGroup:insert(play)
+      }
+  )
+  playButton.x = cX - 30
+  playButton.y = cY + 130
+  playButton.xScale = 0.55
+  playButton.yScale = 0.55
+  sceneGroup:insert(playButton)
+
+
+--*************↑↑↑↑↑↑↑↑↑↑**************************
+--***********Create two buttons******************
+
+
+
 
 local scoreTable = display.newRoundedRect(cX-35,cY+234, 210,80,10)
 scoreTable:setFillColor(0,0,0, 0.15)
@@ -219,6 +234,12 @@ sceneGroup:insert(whiteDot)
 local blueDot = display.newRoundedRect(cX-87,cY+245,5,5,5)
 blueDot:setFillColor(0.65,0.7,1)
 sceneGroup:insert(blueDot)
+
+
+
+
+
+
 
 local scoreMenu = score;
 local scoreOpposite = 0;
