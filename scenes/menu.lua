@@ -19,7 +19,7 @@ local widget = require( "widget" )
 --Create flying yellow baloons in the background
 --***********↓↓↓↓↓↓↓↓↓↓******************
 
-local bolloonsBg = CBE.newVent({
+local balloonsBg = CBE.newVent({
     title = "sparks",
     positionType = "inRadius",
     emitX = cX, emitY = cY+20,
@@ -36,7 +36,7 @@ local bolloonsBg = CBE.newVent({
     }
 
 })
-bolloonsBg:start()
+balloonsBg:start()
 
 --************↑↑↑↑↑↑↑↑↑↑************************
 --Create flying yellow baloons in the background
@@ -59,7 +59,7 @@ function scene:create( event )
 --Change background of scene everytime when load it
 --***************↓↓↓↓↓↓↓↓↓↓**********************
 
-  local bg = display.newRect( menuGroup, cX, cY, W-SOX*2, H-SOY*2);
+  local bgColor = display.newRect( menuGroup, cX, cY, W-SOX*2, H-SOY*2);
   local gradient1 = {
     type="gradient",
     color1={ 0.4, 0.2, 0.9 }, color2={ 0.9, 0.8, 0.8 }, direction="down"
@@ -82,62 +82,31 @@ function scene:create( event )
 
   local gradients = {gradient1,gradient2, gradient3, gradient4};
 
-  bg:setFillColor(gradients[math.random(1,4)])
+  bgColor:setFillColor(gradients[math.random(1,4)])
 
 
 --*************↑↑↑↑↑↑↑↑↑↑**************************
 --Change background of scene everytime when load it
 
-  menuGroup:insert(bolloonsBg)
-
-
-    ---ЗАМЕНИТЬ НА ОДНУ КАРТИНКУ
-
-
-    local fence = display.newImage("menu/fence.png", cX+213,cY-100)
-    fence.xScale = 0.13
-    fence.yScale = 0.13
-    menuGroup:insert(fence)
-
-    local road = display.newImage("menu/road.png", cX,cY+145)
-    road.xScale = 0.13
-    road.yScale = 0.13
-    menuGroup:insert(road)
-
-    local road = display.newImage("menu/road.png", cX,cY+265)
-    road.xScale = 0.13
-    road.yScale = 0.13
-    menuGroup:insert(road)
-
-    local seller = display.newImage("menu/seller.png", cX-30,cY-100)
-    seller.xScale = 0.13
-    seller.yScale = 0.13
-    menuGroup:insert(seller)
-
-    local He = display.newImage("menu/He.png", cX+100,cY-5)
-    He.xScale = 0.11
-    He.yScale = 0.11
-    menuGroup:insert(He)
-
-    local Pb = display.newImage("menu/Pb.png", cX+56,cY+5)
-    Pb.xScale = 0.11
-    Pb.yScale = 0.11
-    menuGroup:insert(Pb)
-
-    local Ar = display.newImage("menu/Ar.png", cX+140,cY-24)
-    Ar.xScale = 0.11
-    Ar.yScale = 0.11
-    menuGroup:insert(Ar)
+  menuGroup:insert(balloonsBg)
 
 
 
+--A bit of design...
+--***************↓↓↓↓↓↓↓↓↓↓**********************
 
+  local bgImage = display.newImage("menu/menuBg.png",cX,cY)
+  sceneGroup:insert(bgImage)
+  bgImage.alpha = 1
+  bgImage.xScale = 0.447
+  bgImage.yScale = 0.447
 
+  local scoreTable = display.newRoundedRect(cX-35,cY+234, 210,80,10)
+  scoreTable:setFillColor(0,0,0, 0.15)
+  sceneGroup:insert(scoreTable)
 
-
-    ---ЗАМЕНИТЬ НА ОДНУ КАРТИНКУ
-
-
+--*************↑↑↑↑↑↑↑↑↑↑**************************
+--A bit of design...
 
 
 --***********Create two buttons******************
@@ -199,39 +168,9 @@ function scene:create( event )
 
 
 
-  local scoreTable = display.newRoundedRect(cX-35,cY+234, 210,80,10)
-  scoreTable:setFillColor(0,0,0, 0.15)
-  sceneGroup:insert(scoreTable)
 
-  local cup = display.newImage("menu/cup.png",cX-110,cY+234)
-  sceneGroup:insert(cup)
-  cup.alpha = 0.8
-  cup.xScale = 0.15
-  cup.yScale = 0.15
-
-
-  local whiteDot = display.newRoundedRect(cX-87.1,cY+235.02,7,6.5,5)
-  whiteDot:setFillColor(1,1,1)
-  sceneGroup:insert(whiteDot)
-
-  local blueDot = display.newRoundedRect(cX-87,cY+235,5,5,5)
-  blueDot:setFillColor(0.65,0.7,1)
-  sceneGroup:insert(blueDot)
-
-
-  local whiteDot = display.newRoundedRect(cX-87.1,cY+245.02,7,6.5,5)
-  whiteDot:setFillColor(1,1,1)
-  sceneGroup:insert(whiteDot)
-
-  local blueDot = display.newRoundedRect(cX-87,cY+245,5,5,5)
-  blueDot:setFillColor(0.65,0.7,1)
-  sceneGroup:insert(blueDot)
-
-
-
-
-  --***********Displaying a record with pictures***
-  --***************↓↓↓↓↓↓↓↓↓↓**********************
+--********Displaying a record with pictures******
+--***************↓↓↓↓↓↓↓↓↓↓**********************
 
 
   local scoreMenu = score;
@@ -265,8 +204,8 @@ function scene:create( event )
 
   end
 
-  --*************↑↑↑↑↑↑↑↑↑↑**************************
-  --***********Displaying a record with pictures*****
+--*************↑↑↑↑↑↑↑↑↑↑**************************
+--********Displaying a record with pictures******
 
 
 
@@ -304,7 +243,7 @@ function scene:hide( event )
 
     elseif ( phase == "did" ) then
         -- Code here runs immediately after the scene goes entirely off screen
-        bolloonsBg:destroy()
+        balloonsBg:destroy()
         composer.removeScene("scenes.menu")
 
     end

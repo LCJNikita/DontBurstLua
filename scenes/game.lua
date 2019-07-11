@@ -9,7 +9,7 @@ local scene = composer.newScene()
 local CBE = require("CBE.CBE")
 local physics = require("physics")
 physics.start()
-physics.setGravity( 0, -1 )
+physics.setGravity( 0, -0.8 )
 -- -----------------------------------------------------------------------------------
 -- Code outside of the scene event functions below will only be executed ONCE unless
 -- the scene is removed entirely (not recycled) via "composer.removeScene()"
@@ -24,10 +24,8 @@ physics.setGravity( 0, -1 )
 -- create()
 function scene:create( event )
 
-
   local sceneGroup = self.view
   local bg = display.newRect(sceneGroup, cX, cY, W-SOX*2, H-SOY*2)
-
 
 --Change background of scene everytime when load it
 --***************↓↓↓↓↓↓↓↓↓↓**********************
@@ -82,8 +80,6 @@ function scene:create( event )
 
 --*************↑↑↑↑↑↑↑↑↑↑**************************
 --Change ballon (red or blue) of scene everytime when load it
-
-
 
 
 --Options of hose animation
@@ -256,10 +252,6 @@ local confetti = CBE.newVent({
 --Options of bursting ball (It works when you lose)
 
 
-
-
-
-
 --Create some variables
 --*****↓↓↓↓↓↓↓↓↓↓******
 
@@ -286,7 +278,6 @@ local confetti = CBE.newVent({
   sceneGroup:insert(ballExR)
 --Top dotted line
 
-
   local colors = {}
   colors[1] = "Blue"
   colors[2] = "Red"
@@ -300,7 +291,6 @@ local confetti = CBE.newVent({
   figure[2] = "star"
   figure[3] = "flower"
   figure[4] = "circle"
-
 
   local ball = display.newImage("sBalloons/yellow.png")
   ball.alpha = 0
@@ -323,7 +313,6 @@ local confetti = CBE.newVent({
   local scoreGame = 0
   local number = {}
 
-
   for i = 1, 10 do
     number[i] = display.newImage("numbers/0.png", cX-8,cY-100)
     number[i].x = number[i].x + 555
@@ -332,8 +321,6 @@ local confetti = CBE.newVent({
     number[i].yScale = 0.01
     sceneGroup:insert(number[i])
   end
-
-
 
   local wowPaint = {
       type = "gradient",
@@ -348,7 +335,6 @@ local confetti = CBE.newVent({
       color2 = { 0, 0, 0 },
       direction = "down"
   }
-
 
 --*****↑↑↑↑↑↑↑↑↑↑↑↑****
 --Create some variables
@@ -432,9 +418,6 @@ local confetti = CBE.newVent({
 
 --***************↑↑↑↑↑↑↑↑↑↑↑↑*******************
 --Main function which generating random balloons
-
-
-
 
 
 --The button is the full phone screen
@@ -539,7 +522,7 @@ local confetti = CBE.newVent({
 
         else
 
-          --if you losing then..
+          --if you losing then...
 
           Runtime:removeEventListener( "enterFrame", increaseBall )
           button.alpha = 0
