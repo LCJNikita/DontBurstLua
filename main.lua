@@ -1,6 +1,5 @@
 local composer = require( "composer" )
 display.setStatusBar( display.HiddenStatusBar )
-physics.setDrawMode( "hybrid" )
 
 local scene = composer.newScene()
 H = display.contentHeight;
