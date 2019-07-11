@@ -3,19 +3,11 @@
 -- main.lua
 --
 -----------------------------------------------------------------------------------------
-H = display.contentHeight;
-W = display.contentWidth;
-
-cX = W/2;
-cY = H/2;
 
 local composer = require( "composer" )
 local CBE = require("CBE.CBE")
 local scene = composer.newScene()
 local widget = require( "widget" )
-local physics = require("physics")
-physics.start()
-physics.setDrawMode( "hybrid" )
 
 -- -----------------------------------------------------------------------------------
 -- Code outside of the scene event functions below will only be executed ONCE unless
@@ -27,7 +19,7 @@ physics.setDrawMode( "hybrid" )
 --Create flying yellow baloons in the background
 --***********↓↓↓↓↓↓↓↓↓↓******************
 
-local vent = CBE.newVent({
+local bolloonsBg = CBE.newVent({
     title = "sparks",
     positionType = "inRadius",
     emitX = cX, emitY = cY+20,
@@ -44,7 +36,7 @@ local vent = CBE.newVent({
     }
 
 })
-vent:start()
+bolloonsBg:start()
 
 --************↑↑↑↑↑↑↑↑↑↑************************
 --Create flying yellow baloons in the background
@@ -96,7 +88,7 @@ function scene:create( event )
 --*************↑↑↑↑↑↑↑↑↑↑**************************
 --Change background of scene everytime when load it
 
-  menuGroup:insert(vent)
+  menuGroup:insert(bolloonsBg)
 
 
     ---ЗАМЕНИТЬ НА ОДНУ КАРТИНКУ
@@ -207,96 +199,74 @@ function scene:create( event )
 
 
 
-local scoreTable = display.newRoundedRect(cX-35,cY+234, 210,80,10)
-scoreTable:setFillColor(0,0,0, 0.15)
-sceneGroup:insert(scoreTable)
+  local scoreTable = display.newRoundedRect(cX-35,cY+234, 210,80,10)
+  scoreTable:setFillColor(0,0,0, 0.15)
+  sceneGroup:insert(scoreTable)
 
-local cup = display.newImage("menu/cup.png",cX-110,cY+234)
-sceneGroup:insert(cup)
-cup.alpha = 0.8
-cup.xScale = 0.15
-cup.yScale = 0.15
-
-
-local whiteDot = display.newRoundedRect(cX-87.1,cY+235.02,7,6.5,5)
-whiteDot:setFillColor(1,1,1)
-sceneGroup:insert(whiteDot)
-
-local blueDot = display.newRoundedRect(cX-87,cY+235,5,5,5)
-blueDot:setFillColor(0.65,0.7,1)
-sceneGroup:insert(blueDot)
+  local cup = display.newImage("menu/cup.png",cX-110,cY+234)
+  sceneGroup:insert(cup)
+  cup.alpha = 0.8
+  cup.xScale = 0.15
+  cup.yScale = 0.15
 
 
-local whiteDot = display.newRoundedRect(cX-87.1,cY+245.02,7,6.5,5)
-whiteDot:setFillColor(1,1,1)
-sceneGroup:insert(whiteDot)
+  local whiteDot = display.newRoundedRect(cX-87.1,cY+235.02,7,6.5,5)
+  whiteDot:setFillColor(1,1,1)
+  sceneGroup:insert(whiteDot)
 
-local blueDot = display.newRoundedRect(cX-87,cY+245,5,5,5)
-blueDot:setFillColor(0.65,0.7,1)
-sceneGroup:insert(blueDot)
+  local blueDot = display.newRoundedRect(cX-87,cY+235,5,5,5)
+  blueDot:setFillColor(0.65,0.7,1)
+  sceneGroup:insert(blueDot)
 
 
+  local whiteDot = display.newRoundedRect(cX-87.1,cY+245.02,7,6.5,5)
+  whiteDot:setFillColor(1,1,1)
+  sceneGroup:insert(whiteDot)
+
+  local blueDot = display.newRoundedRect(cX-87,cY+245,5,5,5)
+  blueDot:setFillColor(0.65,0.7,1)
+  sceneGroup:insert(blueDot)
 
 
 
 
-
-local scoreMenu = score;
-local scoreOpposite = 0;
-local a = 0
-local number = {}
-
-if scoreMenu == 1 then
-
-  zero = display.newImage("numbers/0.png", cX-8,cY-100)
-  zero.x = cup.x + 53
-  zero.y = cY + 243
-  zero.alpha = 0.8
-  zero.xScale = 0.1
-  zero.yScale = 0.1
-  sceneGroup:insert(zero)
-
-else
+  --***********Displaying a record with pictures***
+  --***************↓↓↓↓↓↓↓↓↓↓**********************
 
 
-while scoreMenu > 0.1 do
-local lastNumber = scoreMenu%10
+  local scoreMenu = score;
+  local a = 0
+  local number = {}
 
-scoreOpposite = scoreOpposite + lastNumber;
-scoreOpposite = scoreOpposite * 10;
-scoreMenu = scoreMenu/10 - (scoreMenu%10/10)
-end --]]
+  if scoreMenu == 0 then
+      local zero = display.newImage("numbers/0.png", cX-8,cY-100)
+      zero.x = cX + 38
+      zero.y = cY + 243
+      zero.alpha = 0.8
+      zero.xScale = 0.1
+      zero.yScale = 0.1
+      sceneGroup:insert(zero)
+  else
 
-scoreOpposite = scoreOpposite / 10;
+      while scoreMenu > 0.1 do
 
-while scoreOpposite > 0.1 do
-  local lastNumber = scoreOpposite%10
-  a = a + 1;
-  number[a] = display.newImage("numbers/"..lastNumber..".png", cX-8,cY-100)
-  number[a].x = number[a].x + a*33 - 80
-  number[a].y = cY + 240
-  number[a].alpha = 0.8
-  number[a].xScale = 0.1
-  number[a].yScale = 0.1
-  sceneGroup:insert(number[a])
-  scoreOpposite = scoreOpposite/10 - (scoreOpposite%10/10)
-end
+        local lastNumber = scoreMenu%10
+        a = a + 1;
+        number[a] = display.newImage("numbers/"..lastNumber..".png", cX-8,cY-100)
+        number[a].x = number[a].x - a*33 + 80
+        number[a].y = cY + 240
+        number[a].alpha = 0.8
+        number[a].xScale = 0.1
+        number[a].yScale = 0.1
+        sceneGroup:insert(number[a])
+        scoreMenu = scoreMenu/10 - (scoreMenu%10/10)
 
-  if (score % 10 == 0) then
-    zero = display.newImage("numbers/0.png", cX-8,cY-100)
-    zero.x = number[a].x + 33
-    zero.y = cY + 240
-    zero.alpha = 0.8
-    zero.xScale = 0.1
-    zero.yScale = 0.1
-    sceneGroup:insert(zero)
+      end
+
   end
 
-end
-
-
-
-
+  --*************↑↑↑↑↑↑↑↑↑↑**************************
+  --***********Displaying a record with pictures*****
 
 
 
@@ -334,7 +304,7 @@ function scene:hide( event )
 
     elseif ( phase == "did" ) then
         -- Code here runs immediately after the scene goes entirely off screen
-        vent:destroy()
+        bolloonsBg:destroy()
         composer.removeScene("scenes.menu")
 
     end
