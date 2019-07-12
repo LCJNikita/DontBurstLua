@@ -157,7 +157,7 @@ local paintThree = {
 
   function increaseThree()
     increaseNumber(three)
-    if three.size > 370 then
+    if three.size > 400 then
       three.alpha = 0
       Runtime:removeEventListener( "enterFrame", increaseThree )
       animationOfHose:play();
@@ -166,7 +166,7 @@ local paintThree = {
 
   function increaseTwo()
     increaseNumber(two)
-    if two.size > 370 then
+    if two.size > 400 then
       two.alpha = 0
       three.size = 200
       Runtime:addEventListener( "enterFrame", increaseThree )
@@ -176,7 +176,7 @@ local paintThree = {
 
   function increaseOne()
     increaseNumber(one)
-    if one.size > 350 then
+    if one.size > 400 then
       one.alpha = 0
       two.size = 200
       Runtime:addEventListener( "enterFrame", increaseTwo )
@@ -255,12 +255,6 @@ local confetti = CBE.newVent({
 --Create some variables
 --*****↓↓↓↓↓↓↓↓↓↓******
 
-  local circleSkin = ""
-  local rectSkin = ""
-  local starSkin = ""
-  local flowerSkin = ""
-
-
 --Bottom dotted line
   local ballExG = display.newImage("sBalloons/circleLimit.png",cX,cY-10)
   ballExG.alpha = 0.5
@@ -292,7 +286,7 @@ local confetti = CBE.newVent({
   figure[3] = "flower"
   figure[4] = "circle"
 
-  local ball = display.newImage("sBalloons/yellow.png")
+  local ball = display.newImage("sBalloons/circleYellow.png")
   ball.alpha = 0
   ball.y = cY-10
   ball.xScale = 1
@@ -379,25 +373,25 @@ local confetti = CBE.newVent({
 
 
       if(figure[randFigure] == "circle") then
-        ball = display.newImage("sBalloons/"..figure[randFigure]..""..colors[randColor]..""..circleSkin..".png",cX,cY-20)
+        ball = display.newImage("sBalloons/"..figure[randFigure]..""..colors[randColor]..".png",cX,cY-20)
         ball.alpha = 1
         ball.xScale = 0.3
         ball.yScale = 0.3
         sceneGroup:insert(ball)
       elseif (figure[randFigure] == "rect") then
-        ball = display.newImage("sBalloons/"..figure[randFigure]..""..colors[randColor]..""..rectSkin..".png",cX,cY-20)
+        ball = display.newImage("sBalloons/"..figure[randFigure]..""..colors[randColor]..".png",cX,cY-20)
         ball.alpha = 1
         ball.xScale = 0.3
         ball.yScale = 0.3
         sceneGroup:insert(ball)
       elseif (figure[randFigure] == "star") then
-        ball = display.newImage("sBalloons/"..figure[randFigure]..""..colors[randColor]..""..starSkin..".png",cX,cY-20)
+        ball = display.newImage("sBalloons/"..figure[randFigure]..""..colors[randColor]..".png",cX,cY-20)
         ball.alpha = 1
         ball.xScale = 0.3
         ball.yScale = 0.3
         sceneGroup:insert(ball)
       elseif (figure[randFigure] == "flower") then
-        ball = display.newImage("sBalloons/"..figure[randFigure]..""..colors[randColor]..""..flowerSkin..".png",cX,cY-20)
+        ball = display.newImage("sBalloons/"..figure[randFigure]..""..colors[randColor]..".png",cX,cY-20)
         ball.alpha = 1
         ball.xScale = 0.3
         ball.yScale = 0.3
@@ -537,7 +531,7 @@ local confetti = CBE.newVent({
           end
 
           local function goToSceneWithDelay()
-            composer.gotoScene( "scenes.menu" , {effect = "fade", time = 2000} );
+            composer.gotoScene( "scenes.menu" , {effect = "fade", time = 500} );
           end
           timer.performWithDelay( 500, goToSceneWithDelay )
 
@@ -555,8 +549,8 @@ local confetti = CBE.newVent({
 --Function of button handler
 
 
-timer.performWithDelay( 2720, createBall)
-timer.performWithDelay( 3000, touchDelay)
+timer.performWithDelay( 2320, createBall)
+timer.performWithDelay( 2500, touchDelay)
 
 
 end

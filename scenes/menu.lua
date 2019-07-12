@@ -140,7 +140,7 @@ function scene:create( event )
   local function playButtonFunc( event )
 
       if ( "ended" == event.phase ) then
-         composer.gotoScene( "scenes.game" , {effect = "fade", time = 300} );
+         composer.gotoScene( "scenes.game" , {effect = "fade", time = 200} );
       end
   end
 
